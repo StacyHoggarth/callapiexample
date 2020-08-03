@@ -7,11 +7,32 @@ import axios from 'axios';
 function App() {
   const [books, setBooks] = useState(null);
 
-  const apiURL = "https://www.anapioficeandfire.com/api/books?pageSize=30";
-
-    const fetchData = async () => {
-        const response = await axios.get(apiURL);
-        setBooks(response.data);
+  //const apiURL = "https://federation.taylorcorp.com/connect/token";
+  const apiURL = "https://api.centraaccess.com/api/v1/Jobs/JobRecord/02000Z?jobNumber=000568&pageNumber=1&numberOfRecords=50";
+  const fetchData = async () => {
+    //const response = await axios.get(apiURL);
+    try {
+      console.log ("calling " + apiURL );
+      const response = await axios.get(apiURL
+        /*,
+            headers: {
+                'Access-Control-Allow-Origin': '*',
+                'Content-Type': 'application/json',
+              },
+              withCredentials: true,
+              credentials: 'same-origin',
+              body: {
+                'client_id': 'scs_prod_CentraAccessAPI',
+                'client_secret': 'gW?BXFwLE*5Y!d4',
+                'scope': 'va_access_api'
+              } 
+            }*/
+            );
+            console.log(response);
+            setBooks(response.data);
+      } catch (error) {
+              console.error(error);
+      }
     }
 
   return (
